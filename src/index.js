@@ -1,10 +1,7 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { App } from './App'
+import 'antd/dist/antd.css'
 
-export const test = () => {
-  // console.log(App)
-  for (let i of [1, 2, 3]) {
-    console.log('it works!', i)
-  }
-}
-
-test()
+const wrapper = document.getElementById('app')
+wrapper ? ReactDOM.render(<App />, wrapper) : false
