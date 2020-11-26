@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Table, Typography, Space, Spin } from 'antd'
 import styles from './styles.module.css'
+import cls from 'classnames'
 import type { Employee } from '../types/employee'
 import { fetchEmployees } from '../state/employees/slice'
 
@@ -42,12 +43,6 @@ export const EmployeesList = (): React.Node => {
     fetchEmployeesData()
   }, [])
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedEmployees(selectedRows)
-    },
-  }
-
   if (isLoadingData) {
     return (
       <div className={styles.spinWrapper}>
@@ -61,7 +56,9 @@ export const EmployeesList = (): React.Node => {
       <Table
         rowSelection={{
           type: 'checkbox',
-          ...rowSelection,
+          onChange: (selectedRowKeys, selectedRows) => {
+            setSelectedEmployees(selectedRows)
+          },
         }}
         columns={columns}
         dataSource={employeesData}

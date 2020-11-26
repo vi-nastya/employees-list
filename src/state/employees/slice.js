@@ -1,13 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import api from '../../api/api'
+import type { Employee } from '../../types/employee'
+
+const employeesInitialState = {
+  data: [],
+  isLoading: false,
+  error: null,
+}
 
 const employeesSlice = createSlice({
   name: 'employees',
-  initialState: {
-    data: [],
-    isLoading: false,
-    error: null,
-  },
+  initialState: employeesInitialState,
   reducers: {
     getEmployees(state) {
       state.data = []
