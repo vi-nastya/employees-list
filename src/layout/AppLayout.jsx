@@ -22,16 +22,19 @@ export const AppLayout = (props: LayoutProps): React.Node => {
           style={{ color: 'white', marginRight: 16 }}
         />
         <Title level={2} className={styles.title}>
-          Employee List
+          Сотрудники
         </Title>
       </Header>
 
       <Content className={styles.content}>{props.children}</Content>
 
       <Footer className={styles.footer}>
-        <Text>© Anastasia Videneeva</Text>
-        <Link href="https://github.com/vi-nastya" target="_blank">
-          View source code
+        <Text>© Виденеева Анастасия</Text>
+        <Link
+          href="https://github.com/vi-nastya/employees-list"
+          target="_blank"
+        >
+          Исходный код
         </Link>
       </Footer>
     </Layout>
