@@ -1,11 +1,9 @@
+import employeesData from './data'
 class Api {
   getEmployees() {
-    const data = {
-      // ...
-    }
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(data)
+        resolve(employeesData)
       }, 500)
     })
   }

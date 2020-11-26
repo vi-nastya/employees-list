@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import api from '../../api/api'
 
 const employeesSlice = createSlice({
   name: 'employees',
@@ -27,3 +28,17 @@ const employeesSlice = createSlice({
 })
 
 export const { reducer, actions } = employeesSlice
+
+export const fetchEmployees = () => async (dispatch) => {
+  dispatch(employeesSlice.actions.getEmployees())
+  try {
+    const employeesData = await api.getEmployees()
+    dispatch(employeesSlice.actions.getEmployeesSuccess(employeesData))
+  } catch (err) {
+    dispatch(
+      employeesSlice.actions.getEmployeesFailure(
+        'Не удалось загрузить информацию о сотрудниках'
+      )
+    )
+  }
+}

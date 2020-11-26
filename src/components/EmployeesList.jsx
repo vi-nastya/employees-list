@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Table, Typography, Space } from 'antd'
 import styles from './styles.module.css'
 import type { Employee } from '../types/employee'
+import { fetchEmployees } from '../state/employees/slice'
 
 const columns = [
   {
@@ -20,39 +22,28 @@ const columns = [
   },
 ]
 
-const data: Employee[] = [
-  {
-    key: '1',
-    name: 'Александр',
-    secondName: 'Кузнецов',
-    age: 32,
-  },
-  {
-    key: '2',
-    name: 'Иван',
-    secondName: 'Иванов',
-    age: 27,
-  },
-  {
-    key: '3',
-    name: 'Мария',
-    secondName: 'Смирнова',
-    age: 30,
-  },
-]
-
 export const EmployeesList = (): React.Node => {
   const { Text } = Typography
   const [selectedEmployees, setSelectedEmployees] = useState([])
 
+  const dispatch = useDispatch()
+  const employeesData = useSelector((state) => state.employees.data)
+
+  useEffect(() => {
+    const fetchEmployeesData = async () => {
+      try {
+        await dispatch(fetchEmployees())
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    fetchEmployeesData()
+  }, [])
+
   // rowSelection object indicates the need for row selection
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        'selectedRows: ',
-        selectedRows
-      )
       setSelectedEmployees(selectedRows)
     },
     getCheckboxProps: (record) => ({
@@ -69,7 +60,7 @@ export const EmployeesList = (): React.Node => {
           ...rowSelection,
         }}
         columns={columns}
-        dataSource={data}
+        dataSource={employeesData}
         pagination={false}
       />
       <div className={styles.summary}>
