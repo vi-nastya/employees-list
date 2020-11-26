@@ -46,10 +46,6 @@ export const EmployeesList = (): React.Node => {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedEmployees(selectedRows)
     },
-    getCheckboxProps: (record) => ({
-      disabled: record.name === 'Disabled User', // Column configuration not to be checked
-      name: record.name,
-    }),
   }
 
   return (
@@ -62,6 +58,7 @@ export const EmployeesList = (): React.Node => {
         columns={columns}
         dataSource={employeesData}
         pagination={false}
+        rowKey={(rowData) => String(rowData.id)}
       />
       <div className={styles.summary}>
         <Text strong>Пользователи: </Text>
