@@ -1,12 +1,30 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 import { Layout } from 'antd'
 import Icon, { GithubFilled } from '@ant-design/icons'
 import styles from './styles.module.css'
 import { Typography } from 'antd'
 const { Title, Link, Text } = Typography
 
-export const App = () => {
+type Employee = {
+  name: string,
+  secondName: string,
+  age: number,
+  isSelected: boolean,
+}
+
+const employees: Employee[] = [
+  {
+    name: 'John',
+    secondName: 'Smith',
+    age: 40,
+    isSelected: false,
+  },
+]
+
+export const App = (): React.Node => {
   const { Header, Footer, Content } = Layout
+
   return (
     <Layout>
       <Header className={styles.header}>
@@ -19,7 +37,9 @@ export const App = () => {
           Employee List
         </Title>
       </Header>
+
       <Content>CONTENT GOES HERE</Content>
+
       <Footer className={styles.footer}>
         <Text>© Anastasia Videneeva</Text>
         <Link href="https://github.com/vi-nastya" target="_blank">
