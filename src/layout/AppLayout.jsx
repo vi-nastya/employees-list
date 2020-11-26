@@ -21,7 +21,7 @@ export const AppLayout = (props: LayoutProps): React.Node => {
           component={() => <GithubFilled style={{ fontSize: 28 }} />}
           style={{ color: 'white', marginRight: 16 }}
         />
-        <Title style={{ color: 'white', fontSize: '28px', marginBottom: 0 }}>
+        <Title level={2} className={styles.title}>
           Employee List
         </Title>
       </Header>

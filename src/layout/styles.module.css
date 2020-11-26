@@ -6,7 +6,11 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding: 16px;
+}
+
+.title {
+  color: #ffffff !important;
+  margin-bottom: 0 !important;
 }
 
 .content {
@@ -15,6 +19,7 @@
   width: 100%;
   margin: 0 auto;
   padding: 16px;
+  flex: 1;
 }
 
 .footer {
@@ -22,6 +27,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
   margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .title {
+    font-size: 20px !important;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
 }

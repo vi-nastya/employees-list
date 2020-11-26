@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Table, Typography, Space } from 'antd'
+import { Table, Typography, Space, Spin } from 'antd'
 import styles from './styles.module.css'
 import type { Employee } from '../types/employee'
 import { fetchEmployees } from '../state/employees/slice'
@@ -28,6 +28,7 @@ export const EmployeesList = (): React.Node => {
 
   const dispatch = useDispatch()
   const employeesData = useSelector((state) => state.employees.data)
+  const isLoadingData = useSelector((state) => state.employees.isLoading)
 
   useEffect(() => {
     const fetchEmployeesData = async () => {
@@ -41,11 +42,18 @@ export const EmployeesList = (): React.Node => {
     fetchEmployeesData()
   }, [])
 
-  // rowSelection object indicates the need for row selection
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedEmployees(selectedRows)
     },
+  }
+
+  if (isLoadingData) {
+    return (
+      <div className={styles.spinWrapper}>
+        <Spin size="large" />
+      </div>
+    )
   }
 
   return (
@@ -63,7 +71,7 @@ export const EmployeesList = (): React.Node => {
       <div className={styles.summary}>
         <Text strong>Пользователи: </Text>
         {selectedEmployees.length === 0 && (
-          <Text type="secondary">нет выбранных</Text>
+          <Text type="secondary">не выбраны</Text>
         )}
         {selectedEmployees.length > 0 && (
           <Text>{selectedEmployees.map((item) => item.name).join(', ')}</Text>
